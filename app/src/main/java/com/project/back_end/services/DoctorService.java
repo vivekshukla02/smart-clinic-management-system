@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,18 @@ public class DoctorService {
     public List<String> getAvailableTimeSlots(
             Long doctorId,
             LocalDate date) {
+
+        // Filter availability based on date
+        if (date.isBefore(LocalDate.now())) {
+            return Collections.emptyList();
+        }
+
+        if (date.equals(LocalDate.now())) {
+            return Arrays.asList(
+                    "10:00 AM",
+                    "11:00 AM"
+            );
+        }
 
         return Arrays.asList(
                 "09:00 AM",
