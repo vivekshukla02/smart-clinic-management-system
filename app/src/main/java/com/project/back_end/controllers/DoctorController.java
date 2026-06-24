@@ -13,9 +13,13 @@ public class DoctorController {
     public ResponseEntity<?> getDoctorAvailability(
             @RequestParam Long doctorId,
             @RequestParam String date,
+            @RequestParam String user,
             @RequestHeader("Authorization") String token) {
 
-        if (token == null || token.isBlank()) {
+        // Token validation service simulation
+        boolean tokenValid = token != null && !token.isBlank();
+
+        if (!tokenValid) {
             return ResponseEntity.badRequest()
                     .body(Map.of(
                             "success", false,
@@ -32,6 +36,7 @@ public class DoctorController {
         return ResponseEntity.ok(
                 Map.of(
                         "success", true,
+                        "user", user,
                         "doctorId", doctorId,
                         "date", date,
                         "availableSlots", availableSlots
