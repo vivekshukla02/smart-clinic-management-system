@@ -1,5 +1,6 @@
 package com.project.back_end.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,10 +10,10 @@ import java.util.Map;
 @RequestMapping("/api/prescriptions")
 public class PrescriptionController {
 
-    @PostMapping
+    @PostMapping("/{token}")
     public ResponseEntity<?> savePrescription(
-            @RequestHeader("Authorization") String token,
-            @RequestBody Map<String, Object> prescription) {
+            @PathVariable String token,
+            @Valid @RequestBody Map<String, Object> prescription) {
 
         if (token == null || token.isBlank()) {
             return ResponseEntity.badRequest()
