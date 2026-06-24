@@ -2,6 +2,7 @@ package com.project.back_end.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Future;
 import java.time.LocalDateTime;
 
 @Entity
@@ -18,5 +19,6 @@ public class Appointment {
     private Patient patient;
 
     @NotNull
+    @Future
     private LocalDateTime appointmentTime;
 }
